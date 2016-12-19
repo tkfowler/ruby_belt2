@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Belt2</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <% if flash[:errors] %>
+      <% flash[:errors].each do |e| %>
+        <p><%= e %></p>
+      <% end %>
+    <% end %>
+    <% if current_user && current_page?("/groups")%>
+      <p></p>
+    <% elsif current_user && current_page?(action:"show") %>
+      <a href='/groups'>Dashboard</a>
+    <% end %>
+    <% if current_user %>
+      <a href= "/logout" data-method='delete'>Logout</a>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>

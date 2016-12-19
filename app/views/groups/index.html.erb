@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Hello, <%=current_user.first_name%> <%=current_user.last_name%>!</h1>
+    <p>Here are the organizations you may join:</p>
+    <% @groups.each do |group| %>
+    <div class="group">
+      <% if group.user_id == current_user.id %>
+      <a href='/groups/<%=group.id%>' data-method='delete'>X</a>
+      <% end %>
+      <a class='groupname' href="/groups/<%=group.id%>"><%=group.name%></a>
+      <p>Members:<%=group.users_joined.count%></p>
+      <p><%=group.description%></p>
+    </div>
+    <% end %>
+
+    <div class="creategroup">
+    <h2>Create a new organization:</h2>
+    <form action="/new" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <label>Org Name:<input type="text" name="group[name]"></label>
+      <label>Description:<textarea name="group[description]" rows='5' cols='50'></textarea>
+      <input type='hidden' name='group[user_id]' value='<%=current_user.id%>'>
+      <input type='submit' value='Create'>
+    </form>
+    </div>
+  </body>
+</html>

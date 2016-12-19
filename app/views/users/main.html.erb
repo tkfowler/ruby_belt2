@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login/Register</title>
+  </head>
+  <body>
+    <div class="register">
+      <h2>Register</h2>
+      <form action="/create" method="post">
+        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+        <label>First Name:<input type="text" name="user[first_name]"></label>
+        <label>Last Name:<input type="text" name="user[last_name]"></label>
+        <label>Email:<input type="text" name="user[email]"></label>
+        <label>Password:<input type="password" name="user[password]"></label>
+        <input type="submit" value="Register">
+      </form>
+    </div>
+    <div class="login">
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+        <label>Email:<input type="text" name="email"></label>
+        <label>Password:<input type="password" name="password"></label>
+        <input type='submit' value='Login'>
+      </form>
+    </div>
+  </body>
+</html>
